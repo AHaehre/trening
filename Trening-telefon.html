@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>Daglig trening</title>
+<meta name="theme-color" content="#ece4d6">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="apple-mobile-web-app-title" content="Trening">
+<link rel="apple-touch-icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 180 180'%3E%3Crect width='180' height='180' rx='40' fill='%23c9603f'/%3E%3Cg fill='none' stroke='%23ece4d6' stroke-width='9' stroke-linecap='round'%3E%3Ccircle cx='90' cy='52' r='15'/%3E%3Cline x1='90' y1='67' x2='90' y2='112'/%3E%3Cline x1='90' y1='80' x2='62' y2='98'/%3E%3Cline x1='90' y1='80' x2='118' y2='98'/%3E%3Cline x1='90' y1='112' x2='68' y2='140'/%3E%3Cline x1='90' y1='112' x2='112' y2='140'/%3E%3C/g%3E%3C/svg%3E">
+<link rel="manifest" href="data:application/manifest+json,%7B%22name%22%3A%22Daglig%20trening%22%2C%22short_name%22%3A%22Trening%22%2C%22display%22%3A%22standalone%22%2C%22background_color%22%3A%22%23ece4d6%22%2C%22theme_color%22%3A%22%23ece4d6%22%2C%22start_url%22%3A%22.%22%7D">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;1,9..144,400&family=Hanken+Grotesk:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#ece4d6; --surface:#f6f1e8; --ink:#2b2620; --muted:#7a7264;
+    --line:#ddd2bf; --accent:#c9603f; --accent-soft:#f0d9cd; --accent-ink:#8a3d22;
+    --sage:#5f7355; --sage-soft:#e0e6d8;
+    --sans:"Hanken Grotesk", ui-sans-serif, system-ui, sans-serif;
+    --serif:"Fraunces", Georgia, serif;
+  }
+  *{box-sizing:border-box; -webkit-tap-highlight-color:transparent;}
+  html,body{margin:0;}
+  body{
+    background:var(--bg); color:var(--ink); font-family:var(--sans);
+    line-height:1.5; padding:0; min-height:100vh;
+    padding-top:env(safe-area-inset-top); padding-bottom:env(safe-area-inset-bottom);
+  }
+  .wrap{max-width:460px; margin:0 auto; padding:22px 18px 60px;}
+  header .eyebrow{font-size:12px; letter-spacing:.16em; text-transform:uppercase; color:var(--muted); margin:0;}
+  header h1{font-family:var(--serif); font-weight:400; font-size:34px; line-height:1.05; margin:4px 0 0; letter-spacing:-.01em;}
+  header h1 em{font-style:italic; color:var(--accent);}
+  .meta{display:flex; align-items:center; gap:8px; margin-top:8px; color:var(--muted); font-size:13px;}
+  .dot{width:4px; height:4px; border-radius:50%; background:var(--line);}
+
+  .days{display:flex; gap:7px; margin:20px 0 12px; overflow-x:auto; padding-bottom:2px; -webkit-overflow-scrolling:touch;}
+  .days::-webkit-scrollbar{display:none;}
+  .day{flex:0 0 auto; min-width:46px; text-align:center; padding:9px 6px; border-radius:13px; border:1px solid var(--line);
+    background:transparent; font-family:var(--sans); font-size:13px; color:var(--ink); cursor:pointer; transition:.15s;}
+  .day small{display:block; font-size:10px; color:var(--muted); margin-top:2px; letter-spacing:.04em;}
+  .day[aria-pressed="true"]{background:var(--ink); color:var(--surface); border-color:var(--ink);}
+  .day[aria-pressed="true"] small{color:#cfc6b4;}
+
+  .sessions{display:flex; gap:8px; margin-bottom:18px;}
+  .sess{flex:1; padding:11px; border-radius:14px; border:1px solid var(--line); background:var(--surface);
+    cursor:pointer; display:flex; align-items:center; gap:9px; transition:.15s;}
+  .sess svg{width:20px; height:20px; flex:0 0 auto;}
+  .sess b{font-weight:500; font-size:14px;}
+  .sess span{display:block; font-size:11px; color:var(--muted);}
+  .sess[aria-pressed="true"]{border-color:var(--accent); background:var(--accent-soft);}
+  .sess[aria-pressed="true"] b, .sess[aria-pressed="true"] span{color:var(--accent-ink);}
+
+  .titlebar{display:flex; align-items:baseline; justify-content:space-between; margin:6px 2px 14px;}
+  .titlebar h2{font-family:var(--serif); font-weight:400; font-size:21px; margin:0;}
+  .titlebar .kind{font-size:12px; letter-spacing:.1em; text-transform:uppercase; color:var(--muted);}
+
+  .progress{display:flex; align-items:center; gap:10px; margin:0 2px 16px;}
+  .bar{flex:1; height:6px; background:var(--line); border-radius:99px; overflow:hidden;}
+  .bar i{display:block; height:100%; width:0; background:var(--accent); border-radius:99px; transition:width .3s;}
+  .progress small{font-size:12px; color:var(--muted); white-space:nowrap;}
+  .reset{background:none; border:none; color:var(--muted); font-family:var(--sans); font-size:12px; cursor:pointer; text-decoration:underline; padding:0;}
+
+  .card{background:var(--surface); border:1px solid var(--line); border-radius:18px; padding:14px; margin-bottom:11px;
+    display:flex; gap:13px; align-items:flex-start; transition:.2s;}
+  .card.done{opacity:.55;}
+  .demo{flex:0 0 76px; width:76px; height:76px; border-radius:14px; background:var(--bg); display:flex;
+    align-items:center; justify-content:center; color:var(--ink);}
+  .demo svg{width:64px; height:64px;}
+  .demo .mv{transform-box:fill-box;}
+  .accent{color:var(--accent);}
+  .body{flex:1; min-width:0;}
+  .row1{display:flex; align-items:baseline; justify-content:space-between; gap:8px;}
+  .name{font-weight:500; font-size:15.5px;}
+  .card.done .name{text-decoration:line-through;}
+  .reps{flex:0 0 auto; font-size:12px; color:var(--accent-ink); background:var(--accent-soft); padding:2px 9px; border-radius:99px;}
+  .cue{font-size:13px; color:var(--muted); margin:5px 0 9px; line-height:1.45;}
+  .actions{display:flex; align-items:center; gap:8px;}
+  .check{flex:1; padding:8px; border-radius:11px; border:1px solid var(--line); background:transparent;
+    font-family:var(--sans); font-size:13px; color:var(--ink); cursor:pointer; display:flex; align-items:center; justify-content:center; gap:6px;}
+  .check svg{width:15px; height:15px;}
+  .card.done .check{background:var(--sage-soft); border-color:var(--sage); color:var(--sage);}
+  .vid{flex:0 0 auto; padding:8px 12px; border-radius:11px; border:1px solid var(--line); background:transparent;
+    color:var(--ink); text-decoration:none; font-size:13px; display:flex; align-items:center; gap:6px;}
+  .vid svg{width:15px; height:15px;}
+
+  .note{margin-top:22px; padding:15px 16px; border-radius:16px; background:var(--sage-soft); color:#3f4d38; font-size:13px; line-height:1.55;}
+  .note b{font-weight:600;}
+  .install{margin-top:12px; font-size:12.5px; color:var(--muted); line-height:1.55; text-align:center;}
+  .weekend{padding:34px 16px; text-align:center; color:var(--muted);}
+  .weekend svg{width:40px; height:40px; opacity:.5; margin-bottom:10px;}
+  .weekend p{margin:0; font-size:14px;}
+
+  @keyframes circleS{0%{transform:translate(0,0)}25%{transform:translate(2.5px,-2.5px)}50%{transform:translate(0,-4px)}75%{transform:translate(-2.5px,-2.5px)}100%{transform:translate(0,0)}}
+  @keyframes rotT{0%,100%{transform:rotate(0)}25%{transform:rotate(-15deg)}75%{transform:rotate(15deg)}}
+  @keyframes bob{0%,100%{transform:translateY(0)}50%{transform:translateY(-5px)}}
+  @keyframes pressF{0%,100%{transform:translateX(0)}50%{transform:translateX(13px)}}
+  @keyframes pullB{0%,100%{transform:translateX(0)}50%{transform:translateX(-11px)}}
+  @keyframes openL{0%,100%{transform:rotate(0)}50%{transform:rotate(28deg)}}
+  @keyframes openR{0%,100%{transform:rotate(0)}50%{transform:rotate(-28deg)}}
+  @keyframes hipLift{0%,100%{transform:translateY(0)}50%{transform:translateY(-11px)}}
+  @keyframes fold{0%,100%{transform:rotate(0)}50%{transform:rotate(40deg)}}
+  @keyframes dip{0%,100%{transform:translateY(0)}50%{transform:translateY(6px)}}
+  @keyframes breathe{0%,100%{transform:scale(1)}50%{transform:scale(1.16)}}
+  @keyframes legExt{0%,100%{transform:rotate(0)}50%{transform:rotate(-42deg)}}
+  @keyframes legLift{0%,100%{transform:rotate(0)}50%{transform:rotate(-24deg)}}
+  @keyframes sweepUp{0%,100%{transform:rotate(8deg)}50%{transform:rotate(-150deg)}}
+  @keyframes toeUp{0%,100%{transform:translateY(0)}50%{transform:translateY(-6px)}}
+  @keyframes deadL{0%,100%{transform:rotate(0)}50%{transform:rotate(46deg)}}
+  @keyframes deadR{0%,100%{transform:rotate(0)}50%{transform:rotate(-30deg)}}
+  .a-circle{animation:circleS 2.6s ease-in-out infinite}
+  .a-rot{animation:rotT 3s ease-in-out infinite}
+  .a-bob{animation:bob 2.4s ease-in-out infinite}
+  .a-press{animation:pressF 2.2s ease-in-out infinite}
+  .a-pull{animation:pullB 2.2s ease-in-out infinite}
+  .a-openL{animation:openL 2.4s ease-in-out infinite}
+  .a-openR{animation:openR 2.4s ease-in-out infinite}
+  .a-hip{animation:hipLift 2.4s ease-in-out infinite}
+  .a-fold{animation:fold 3s ease-in-out infinite}
+  .a-dip{animation:dip 2.2s ease-in-out infinite}
+  .a-breathe{animation:breathe 3.4s ease-in-out infinite}
+  .a-legext{animation:legExt 2.4s ease-in-out infinite}
+  .a-leglift{animation:legLift 2s ease-in-out infinite}
+  .a-sweep{animation:sweepUp 3.2s ease-in-out infinite}
+  .a-toe{animation:toeUp 1.8s ease-in-out infinite}
+  .a-deadL{animation:deadL 2.6s ease-in-out infinite}
+  .a-deadR{animation:deadR 2.6s ease-in-out infinite}
+  @media (prefers-reduced-motion: reduce){ .demo svg *{animation:none !important;} }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <p class="eyebrow">Calisthenics · nybegynner</p>
+    <h1 id="greet">God morgen.<br><em id="dayName">Mandag</em></h1>
+    <div class="meta"><span><i></i>10 minutter</span><span class="dot"></span><span id="metaKind">Bevegelighet</span></div>
+  </header>
+
+  <div class="days" id="days" role="group" aria-label="Velg dag"></div>
+  <div class="sessions" id="sessions"></div>
+
+  <div id="content"></div>
+
+  <div class="note">
+    <b>Husk:</b> skånsomt for knær og håndledd — ingen hopp eller dype bøy, og press på strikk, underarmer eller knyttnever. Muskeltretthet er greit; leddsmerte betyr stopp.
+  </div>
+  <p class="install">Legg til på hjemskjermen: åpne i nettleser → <b>Del</b>-knappen → <b>Legg til på Hjem-skjerm</b>.</p>
+</div>
+
+<script>
+(function(){
+  var ICON = {
+    sunrise:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v3M5.6 9.6 7 11M3 16h2M19 16h2M17 11l1.4-1.4M3 20h18"/><path d="M8 16a4 4 0 0 1 8 0"/></svg>',
+    sunset:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 9V3M5.6 9.6 7 11M3 16h2M19 16h2M17 11l1.4-1.4M3 20h18"/><path d="M8 16a4 4 0 0 1 8 0"/></svg>',
+    check:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>',
+    circle:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="9"/></svg>',
+    play:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M10 9l5 3-5 3z" fill="currentColor"/></svg>',
+    coffee:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 9h12v5a4 4 0 0 1-4 4H9a4 4 0 0 1-4-4z"/><path d="M17 10h2a2 2 0 0 1 0 4h-2"/><path d="M8 4v2M12 3v3"/></svg>'
+  };
+
+  function fig(parts){
+    return '<svg viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="4.2" stroke-linecap="round" stroke-linejoin="round">'+parts+'</svg>';
+  }
+  var ANIM = {
+    neck: fig('<g class="mv a-circle" style="transform-origin:50px 30px"><circle cx="50" cy="26" r="9"/></g><line x1="50" y1="35" x2="50" y2="68"/><line x1="50" y1="44" x2="34" y2="58"/><line x1="50" y1="44" x2="66" y2="58"/><line x1="50" y1="68" x2="38" y2="90"/><line x1="50" y1="68" x2="62" y2="90"/>'),
+    catcow: fig('<g class="mv a-bob" style="transform-origin:50px 55px"><circle cx="26" cy="50" r="8"/><path d="M33 54 Q50 44 70 52"/></g><line x1="70" y1="52" x2="70" y2="80"/><line x1="46" y1="50" x2="40" y2="80"/><line x1="33" y1="58" x2="33" y2="80"/><line x1="70" y1="52" x2="78" y2="80"/>'),
+    rotate: fig('<circle cx="50" cy="22" r="9"/><g class="mv a-rot" style="transform-origin:50px 62px"><line x1="50" y1="31" x2="50" y2="62"/><line x1="50" y1="40" x2="32" y2="48"/><line x1="50" y1="40" x2="68" y2="48"/></g><line x1="50" y1="62" x2="40" y2="92"/><line x1="50" y1="62" x2="60" y2="92"/>'),
+    hipcircle: fig('<circle cx="50" cy="20" r="9"/><line x1="50" y1="29" x2="50" y2="40"/><g class="mv a-circle" style="transform-origin:50px 55px"><line x1="50" y1="40" x2="50" y2="62"/><line x1="50" y1="44" x2="36" y2="40"/><line x1="50" y1="44" x2="64" y2="40"/></g><line x1="50" y1="62" x2="40" y2="92"/><line x1="50" y1="62" x2="60" y2="92"/>'),
+    bandover: fig('<circle cx="50" cy="22" r="9"/><line x1="50" y1="31" x2="50" y2="66"/><line x1="50" y1="66" x2="40" y2="92"/><line x1="50" y1="66" x2="60" y2="92"/><g class="mv a-sweep" style="transform-origin:50px 40px"><line x1="50" y1="40" x2="30" y2="52"/><line x1="50" y1="40" x2="70" y2="52"/><line class="accent" x1="30" y1="52" x2="70" y2="52" stroke-dasharray="3 4"/></g>'),
+    ankle: fig('<circle cx="24" cy="34" r="8"/><line x1="30" y1="40" x2="52" y2="52"/><line x1="52" y1="52" x2="76" y2="52"/><g class="mv a-legext" style="transform-origin:76px 52px"><line x1="76" y1="52" x2="76" y2="82"/></g>'),
+    fold: fig('<g class="mv a-fold" style="transform-origin:50px 64px"><circle cx="50" cy="22" r="9"/><line x1="50" y1="31" x2="50" y2="64"/><line x1="50" y1="40" x2="40" y2="58"/><line x1="50" y1="40" x2="60" y2="58"/></g><line x1="50" y1="64" x2="42" y2="92"/><line x1="50" y1="64" x2="58" y2="92"/>'),
+    breathe: fig('<circle cx="50" cy="20" r="9"/><line x1="50" y1="29" x2="50" y2="66"/><g class="mv a-breathe accent" style="transform-origin:50px 46px"><circle cx="50" cy="46" r="11"/></g><line x1="50" y1="66" x2="42" y2="92"/><line x1="50" y1="66" x2="58" y2="92"/>'),
+    chestpress: fig('<circle cx="34" cy="22" r="9"/><line x1="34" y1="31" x2="34" y2="66"/><line x1="34" y1="66" x2="26" y2="92"/><line x1="34" y1="66" x2="42" y2="92"/><g class="mv a-press" style="transform-origin:34px 42px"><line x1="34" y1="42" x2="56" y2="42"/><line class="accent" x1="56" y1="36" x2="56" y2="48"/></g>'),
+    pushup: fig('<g class="mv a-dip" style="transform-origin:50px 50px"><circle cx="22" cy="44" r="8"/><line x1="29" y1="46" x2="74" y2="58"/><line x1="40" y1="49" x2="38" y2="70"/></g><line x1="74" y1="58" x2="84" y2="40"/><line x1="38" y1="70" x2="34" y2="84"/>'),
+    plank: fig('<g class="mv a-bob" style="transform-origin:50px 50px"><circle cx="24" cy="46" r="8"/><line x1="31" y1="48" x2="78" y2="58"/></g><line x1="78" y1="58" x2="80" y2="80"/><line x1="40" y1="50" x2="36" y2="74"/><line x1="36" y1="74" x2="24" y2="74"/>'),
+    deadbug: fig('<line x1="20" y1="60" x2="60" y2="60"/><circle cx="68" cy="60" r="8"/><g class="mv a-deadL" style="transform-origin:32px 60px"><line x1="32" y1="60" x2="32" y2="34"/></g><g class="mv a-deadR" style="transform-origin:54px 60px"><line x1="54" y1="60" x2="58" y2="34"/></g><line x1="44" y1="60" x2="44" y2="84"/>'),
+    row: fig('<circle cx="34" cy="22" r="9"/><line x1="34" y1="31" x2="34" y2="66"/><line x1="34" y1="66" x2="26" y2="92"/><line x1="34" y1="66" x2="42" y2="92"/><g class="mv a-pull" style="transform-origin:34px 42px"><line x1="34" y1="42" x2="58" y2="42"/><line class="accent" x1="58" y1="36" x2="58" y2="48"/></g>'),
+    pullapart: fig('<circle cx="50" cy="22" r="9"/><line x1="50" y1="31" x2="50" y2="66"/><line x1="50" y1="66" x2="42" y2="92"/><line x1="50" y1="66" x2="58" y2="92"/><g class="mv a-openL" style="transform-origin:50px 44px"><line x1="50" y1="44" x2="30" y2="44"/></g><g class="mv a-openR" style="transform-origin:50px 44px"><line x1="50" y1="44" x2="70" y2="44"/></g><line class="accent" x1="34" y1="44" x2="66" y2="44" stroke-dasharray="3 4"/>'),
+    bridge: fig('<g class="mv a-hip" style="transform-origin:50px 70px"><circle cx="20" cy="64" r="8"/><line x1="27" y1="66" x2="58" y2="64"/></g><line x1="58" y1="64" x2="64" y2="84"/><line x1="64" y1="84" x2="80" y2="84"/><line x1="40" y1="65" x2="40" y2="84"/>'),
+    clamshell: fig('<circle cx="22" cy="40" r="8"/><line x1="28" y1="44" x2="52" y2="56"/><line x1="52" y1="56" x2="48" y2="80"/><g class="mv a-leglift" style="transform-origin:52px 56px"><line x1="52" y1="56" x2="78" y2="62"/></g>'),
+    calf: fig('<g class="mv a-toe" style="transform-origin:50px 50px"><circle cx="50" cy="20" r="9"/><line x1="50" y1="29" x2="50" y2="62"/><line x1="50" y1="40" x2="38" y2="34"/><line x1="50" y1="40" x2="62" y2="34"/><line x1="50" y1="62" x2="42" y2="86"/><line x1="50" y1="62" x2="58" y2="86"/></g><line x1="34" y1="90" x2="66" y2="90"/>')
+  };
+
+  var morning = [
+    {id:"neck", n:"Nakke- & skulderrundinger", r:"30 sek", c:"Små, rolige sirkler begge veier", q:"neck shoulder rolls mobility"},
+    {id:"catcow", n:"Katt–ku på underarmer", r:"30–45 sek", c:"Pute under knærne, rund og svai ryggen rolig", q:"cat cow on forearms"},
+    {id:"rotate", n:"Bryst-/ryggrotasjon", r:"30 sek", c:"Sittende eller stående, roter rolig side til side", q:"thoracic rotation stretch standing"},
+    {id:"hipcircle", n:"Stående hoftesirkler", r:"30 sek", c:"Hendene på hoftene, knevennlig", q:"standing hip circles mobility"},
+    {id:"bandover", n:"Strikk over hodet", r:"30–45 sek", c:"Bredt grep: foran lårene → over hodet → bak", q:"band shoulder dislocates"},
+    {id:"ankle", n:"Ankel- & knemobilitet", r:"30 sek", c:"Sittende, strekk/bøy rolig, aldri til smerte", q:"seated ankle knee mobility"},
+    {id:"fold", n:"Myk foroverbøy", r:"30 sek", c:"Lett bøyde knær, kjenn baksiden av lårene", q:"standing forward fold soft knees"},
+    {id:"breathe", n:"3 dype pust", r:"—", c:"Avslutt rolig", q:"deep breathing exercise"}
+  ];
+  var oktA = [
+    {id:"chestpress", n:"Strikk-brystpress", r:"10–12 rep", c:"Strikk festet bak deg, press hendene fram", q:"resistance band chest press"},
+    {id:"pushup", n:"Skrå push-ups mot benk", r:"6–10 rep", c:"Grip kanten; vondt i håndledd? gjør mot vegg", q:"incline push up on bench"},
+    {id:"plank", n:"Underarmsplanke", r:"20–30 sek", c:"Rett kropp, hvil på underarmene", q:"forearm plank beginner"},
+    {id:"deadbug", n:"Dead bug", r:"8 / side", c:"Korsryggen presset i gulvet hele tiden", q:"dead bug exercise"}
+  ];
+  var oktB = [
+    {id:"row", n:"Strikk-roing", r:"10–12 rep", c:"Trekk albuene bak, klem skulderbladene", q:"resistance band row"},
+    {id:"pullapart", n:"Strikk pull-aparts", r:"12–15 rep", c:"Strake armer, dra hendene fra hverandre", q:"band pull apart"},
+    {id:"bridge", n:"Setebro", r:"12–15 rep", c:"Løft hoftene, klem setet på toppen", q:"glute bridge exercise"},
+    {id:"clamshell", n:"Sideliggende benløft / clamshell", r:"12 / side", c:"Strikk rundt knærne for mer motstand", q:"clamshell exercise"},
+    {id:"calf", n:"Stående tåhev", r:"15 rep", c:"Opp på tærne, senk rolig", q:"standing calf raise"}
+  ];
+
+  var dayNames={1:"Mandag",2:"Tirsdag",3:"Onsdag",4:"Torsdag",5:"Fredag"};
+  var dayShort={1:"Man",2:"Tir",3:"Ons",4:"Tor",5:"Fre"};
+  var dayPlan={1:"A",2:"B",3:"A",4:"B",5:"A"};
+
+  function store(k,v){ try{ if(v===undefined){return localStorage.getItem(k);} localStorage.setItem(k,v);}catch(e){return null;} }
+
+  var now=new Date(), wd=now.getDay();
+  var isWeekend = (wd===0||wd===6);
+  var selDay = isWeekend?1:wd;
+  var selSess = now.getHours()<13?"m":"e";
+
+  var elDays=document.getElementById("days");
+  var elSess=document.getElementById("sessions");
+  var elContent=document.getElementById("content");
+  var elDayName=document.getElementById("dayName");
+  var elGreet=document.getElementById("greet");
+  var elKind=document.getElementById("metaKind");
+
+  function buildChrome(){
+    elDays.innerHTML="";
+    [1,2,3,4,5].forEach(function(k){
+      var b=document.createElement("button");
+      b.className="day"; b.setAttribute("aria-pressed", k===selDay);
+      b.innerHTML=dayShort[k]+'<small>Økt '+dayPlan[k]+'</small>';
+      b.onclick=function(){selDay=k; render();};
+      elDays.appendChild(b);
+    });
+    elSess.innerHTML="";
+    [["m","Morgen","Bevegelighet",ICON.sunrise],["e","Slutt på dagen","Styrke",ICON.sunset]].forEach(function(p){
+      var b=document.createElement("button");
+      b.className="sess"; b.setAttribute("aria-pressed", p[0]===selSess);
+      b.innerHTML=p[3]+'<span><b>'+p[1]+'</b>'+p[2]+'</span>';
+      b.onclick=function(){selSess=p[0]; render();};
+      elSess.appendChild(b);
+    });
+  }
+
+  function listFor(){ return selSess==="m"?morning:(dayPlan[selDay]==="A"?oktA:oktB); }
+  function sessKey(){ return "trn:"+selDay+":"+selSess; }
+  function getDone(){ var raw=store(sessKey()); try{return raw?JSON.parse(raw):{};}catch(e){return {};} }
+  function setDone(o){ store(sessKey(), JSON.stringify(o)); }
+
+  function render(){
+    buildChrome();
+    var hr=now.getHours();
+    elGreet.firstChild.textContent = hr<11?"God morgen.":hr<17?"God dag.":"God kveld.";
+    elDayName.textContent=dayNames[selDay];
+    elKind.textContent = selSess==="m"?"Bevegelighet":"Styrke";
+
+    var data=listFor();
+    var done=getDone();
+    var title = selSess==="m" ? "Bevegelighetsflyt"
+      : (dayPlan[selDay]==="A" ? "Press & kjerne" : "Trekk & underkropp");
+    var kind = selSess==="m" ? "Morgen · daglig" : "Økt "+dayPlan[selDay];
+
+    var doneCount=data.filter(function(x){return done[x.id];}).length;
+    var pct=Math.round(doneCount/data.length*100);
+
+    var html='<div class="titlebar"><h2>'+title+'</h2><span class="kind">'+kind+'</span></div>';
+    html+='<div class="progress"><div class="bar"><i style="width:'+pct+'%"></i></div>'
+        +'<small>'+doneCount+' / '+data.length+'</small>'
+        +'<button class="reset" id="resetBtn">Nullstill</button></div>';
+
+    data.forEach(function(ex,i){
+      var isDone=!!done[ex.id];
+      html+='<div class="card'+(isDone?' done':'')+'" data-id="'+ex.id+'">'
+        +'<div class="demo">'+(ANIM[ex.id]||"")+'</div>'
+        +'<div class="body">'
+          +'<div class="row1"><span class="name">'+(i+1)+'. '+ex.n+'</span><span class="reps">'+ex.r+'</span></div>'
+          +'<div class="cue">'+ex.c+'</div>'
+          +'<div class="actions">'
+            +'<button class="check" data-id="'+ex.id+'">'+(isDone?ICON.check+' Fullført':ICON.circle+' Marker')+'</button>'
+            +'<a class="vid" target="_blank" rel="noopener" href="https://www.youtube.com/results?search_query='+encodeURIComponent(ex.q)+'">'+ICON.play+' Video</a>'
+          +'</div>'
+        +'</div></div>';
+    });
+    elContent.innerHTML=html;
+
+    elContent.querySelectorAll(".check").forEach(function(btn){
+      btn.onclick=function(){
+        var d=getDone(); var id=btn.getAttribute("data-id");
+        if(d[id]){delete d[id];}else{d[id]=1;}
+        setDone(d); render();
+      };
+    });
+    var rb=document.getElementById("resetBtn");
+    if(rb) rb.onclick=function(){ setDone({}); render(); };
+  }
+
+  if(isWeekend){
+    buildChrome();
+    elContent.innerHTML='<div class="weekend">'+ICON.coffee+'<p>Det er helg — ingen fast økt i dag.<br>Ta en rolig tur, eller velg en ukedag over for å se opplegget.</p></div>';
+    elDayName.textContent = wd===6?"Lørdag":"Søndag";
+    elGreet.firstChild.textContent = "Hvil godt.";
+    elKind.textContent="Fri";
+  } else {
+    render();
+  }
+})();
+</script>
+</body>
+</html>
