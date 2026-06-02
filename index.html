@@ -9,7 +9,8 @@
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="default">
 <meta name="apple-mobile-web-app-title" content="Trening">
-<link rel="apple-touch-icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 180 180'%3E%3Crect width='180' height='180' rx='40' fill='%23c9603f'/%3E%3Cg fill='none' stroke='%23ece4d6' stroke-width='9' stroke-linecap='round'%3E%3Ccircle cx='90' cy='52' r='15'/%3E%3Cline x1='90' y1='67' x2='90' y2='112'/%3E%3Cline x1='90' y1='80' x2='62' y2='98'/%3E%3Cline x1='90' y1='80' x2='118' y2='98'/%3E%3Cline x1='90' y1='112' x2='68' y2='140'/%3E%3Cline x1='90' y1='112' x2='112' y2='140'/%3E%3C/g%3E%3C/svg%3E">
+<link rel="apple-touch-icon" href="icon.png">
+<link rel="icon" type="image/png" href="icon.png">
 <link rel="manifest" href="data:application/manifest+json,%7B%22name%22%3A%22Daglig%20trening%22%2C%22short_name%22%3A%22Trening%22%2C%22display%22%3A%22standalone%22%2C%22background_color%22%3A%22%23ece4d6%22%2C%22theme_color%22%3A%22%23ece4d6%22%2C%22start_url%22%3A%22.%22%7D">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -94,39 +95,25 @@
   .weekend p{margin:0; font-size:14px;}
 
   @keyframes circleS{0%{transform:translate(0,0)}25%{transform:translate(2.5px,-2.5px)}50%{transform:translate(0,-4px)}75%{transform:translate(-2.5px,-2.5px)}100%{transform:translate(0,0)}}
-  @keyframes rotT{0%,100%{transform:rotate(0)}25%{transform:rotate(-15deg)}75%{transform:rotate(15deg)}}
-  @keyframes bob{0%,100%{transform:translateY(0)}50%{transform:translateY(-5px)}}
-  @keyframes pressF{0%,100%{transform:translateX(0)}50%{transform:translateX(13px)}}
-  @keyframes pullB{0%,100%{transform:translateX(0)}50%{transform:translateX(-11px)}}
-  @keyframes openL{0%,100%{transform:rotate(0)}50%{transform:rotate(28deg)}}
-  @keyframes openR{0%,100%{transform:rotate(0)}50%{transform:rotate(-28deg)}}
-  @keyframes hipLift{0%,100%{transform:translateY(0)}50%{transform:translateY(-11px)}}
-  @keyframes fold{0%,100%{transform:rotate(0)}50%{transform:rotate(40deg)}}
-  @keyframes dip{0%,100%{transform:translateY(0)}50%{transform:translateY(6px)}}
-  @keyframes breathe{0%,100%{transform:scale(1)}50%{transform:scale(1.16)}}
-  @keyframes legExt{0%,100%{transform:rotate(0)}50%{transform:rotate(-42deg)}}
-  @keyframes legLift{0%,100%{transform:rotate(0)}50%{transform:rotate(-24deg)}}
-  @keyframes sweepUp{0%,100%{transform:rotate(8deg)}50%{transform:rotate(-150deg)}}
-  @keyframes toeUp{0%,100%{transform:translateY(0)}50%{transform:translateY(-6px)}}
-  @keyframes deadL{0%,100%{transform:rotate(0)}50%{transform:rotate(46deg)}}
-  @keyframes deadR{0%,100%{transform:rotate(0)}50%{transform:rotate(-30deg)}}
-  .a-circle{animation:circleS 2.6s ease-in-out infinite}
+  @keyframes rotT{0%,100%{transform:rotate(0)}25%{transform:rotate(-14deg)}75%{transform:rotate(14deg)}}
+  @keyframes bob{0%,100%{transform:translateY(0)}50%{transform:translateY(-3px)}}
+  @keyframes foldF{0%,100%{transform:rotate(0)}50%{transform:rotate(72deg)}}
+  @keyframes dip{0%,100%{transform:translateY(0)}50%{transform:translateY(7px)}}
+  @keyframes breathe{0%,100%{transform:scale(1)}50%{transform:scale(1.18)}}
+  @keyframes legE{0%,100%{transform:rotate(0)}50%{transform:rotate(-68deg)}}
+  @keyframes toeU{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
+  @keyframes fA{0%{opacity:1}42%{opacity:1}50%{opacity:0}92%{opacity:0}100%{opacity:1}}
+  @keyframes fB{0%{opacity:0}42%{opacity:0}50%{opacity:1}92%{opacity:1}100%{opacity:0}}
+  .a-circle{animation:circleS 2.8s ease-in-out infinite}
   .a-rot{animation:rotT 3s ease-in-out infinite}
-  .a-bob{animation:bob 2.4s ease-in-out infinite}
-  .a-press{animation:pressF 2.2s ease-in-out infinite}
-  .a-pull{animation:pullB 2.2s ease-in-out infinite}
-  .a-openL{animation:openL 2.4s ease-in-out infinite}
-  .a-openR{animation:openR 2.4s ease-in-out infinite}
-  .a-hip{animation:hipLift 2.4s ease-in-out infinite}
-  .a-fold{animation:fold 3s ease-in-out infinite}
+  .a-bob{animation:bob 3s ease-in-out infinite}
+  .a-fold{animation:foldF 3.2s ease-in-out infinite}
   .a-dip{animation:dip 2.2s ease-in-out infinite}
-  .a-breathe{animation:breathe 3.4s ease-in-out infinite}
-  .a-legext{animation:legExt 2.4s ease-in-out infinite}
-  .a-leglift{animation:legLift 2s ease-in-out infinite}
-  .a-sweep{animation:sweepUp 3.2s ease-in-out infinite}
-  .a-toe{animation:toeUp 1.8s ease-in-out infinite}
-  .a-deadL{animation:deadL 2.6s ease-in-out infinite}
-  .a-deadR{animation:deadR 2.6s ease-in-out infinite}
+  .a-breathe{animation:breathe 3.6s ease-in-out infinite}
+  .a-legext{animation:legE 2.6s ease-in-out infinite}
+  .a-toe{animation:toeU 1.9s ease-in-out infinite}
+  .a-fadeA{animation:fA 3s ease-in-out infinite}
+  .a-fadeB{animation:fB 3s ease-in-out infinite}
   @media (prefers-reduced-motion: reduce){ .demo svg *{animation:none !important;} }
 </style>
 </head>
@@ -164,47 +151,47 @@
     return '<svg viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="4.2" stroke-linecap="round" stroke-linejoin="round">'+parts+'</svg>';
   }
   var ANIM = {
-    neck: fig('<g class="mv a-circle" style="transform-origin:50px 30px"><circle cx="50" cy="26" r="9"/></g><line x1="50" y1="35" x2="50" y2="68"/><line x1="50" y1="44" x2="34" y2="58"/><line x1="50" y1="44" x2="66" y2="58"/><line x1="50" y1="68" x2="38" y2="90"/><line x1="50" y1="68" x2="62" y2="90"/>'),
-    catcow: fig('<g class="mv a-bob" style="transform-origin:50px 55px"><circle cx="26" cy="50" r="8"/><path d="M33 54 Q50 44 70 52"/></g><line x1="70" y1="52" x2="70" y2="80"/><line x1="46" y1="50" x2="40" y2="80"/><line x1="33" y1="58" x2="33" y2="80"/><line x1="70" y1="52" x2="78" y2="80"/>'),
-    rotate: fig('<circle cx="50" cy="22" r="9"/><g class="mv a-rot" style="transform-origin:50px 62px"><line x1="50" y1="31" x2="50" y2="62"/><line x1="50" y1="40" x2="32" y2="48"/><line x1="50" y1="40" x2="68" y2="48"/></g><line x1="50" y1="62" x2="40" y2="92"/><line x1="50" y1="62" x2="60" y2="92"/>'),
-    hipcircle: fig('<circle cx="50" cy="20" r="9"/><line x1="50" y1="29" x2="50" y2="40"/><g class="mv a-circle" style="transform-origin:50px 55px"><line x1="50" y1="40" x2="50" y2="62"/><line x1="50" y1="44" x2="36" y2="40"/><line x1="50" y1="44" x2="64" y2="40"/></g><line x1="50" y1="62" x2="40" y2="92"/><line x1="50" y1="62" x2="60" y2="92"/>'),
-    bandover: fig('<circle cx="50" cy="22" r="9"/><line x1="50" y1="31" x2="50" y2="66"/><line x1="50" y1="66" x2="40" y2="92"/><line x1="50" y1="66" x2="60" y2="92"/><g class="mv a-sweep" style="transform-origin:50px 40px"><line x1="50" y1="40" x2="30" y2="52"/><line x1="50" y1="40" x2="70" y2="52"/><line class="accent" x1="30" y1="52" x2="70" y2="52" stroke-dasharray="3 4"/></g>'),
-    ankle: fig('<circle cx="24" cy="34" r="8"/><line x1="30" y1="40" x2="52" y2="52"/><line x1="52" y1="52" x2="76" y2="52"/><g class="mv a-legext" style="transform-origin:76px 52px"><line x1="76" y1="52" x2="76" y2="82"/></g>'),
-    fold: fig('<g class="mv a-fold" style="transform-origin:50px 64px"><circle cx="50" cy="22" r="9"/><line x1="50" y1="31" x2="50" y2="64"/><line x1="50" y1="40" x2="40" y2="58"/><line x1="50" y1="40" x2="60" y2="58"/></g><line x1="50" y1="64" x2="42" y2="92"/><line x1="50" y1="64" x2="58" y2="92"/>'),
-    breathe: fig('<circle cx="50" cy="20" r="9"/><line x1="50" y1="29" x2="50" y2="66"/><g class="mv a-breathe accent" style="transform-origin:50px 46px"><circle cx="50" cy="46" r="11"/></g><line x1="50" y1="66" x2="42" y2="92"/><line x1="50" y1="66" x2="58" y2="92"/>'),
-    chestpress: fig('<circle cx="34" cy="22" r="9"/><line x1="34" y1="31" x2="34" y2="66"/><line x1="34" y1="66" x2="26" y2="92"/><line x1="34" y1="66" x2="42" y2="92"/><g class="mv a-press" style="transform-origin:34px 42px"><line x1="34" y1="42" x2="56" y2="42"/><line class="accent" x1="56" y1="36" x2="56" y2="48"/></g>'),
-    pushup: fig('<g class="mv a-dip" style="transform-origin:50px 50px"><circle cx="22" cy="44" r="8"/><line x1="29" y1="46" x2="74" y2="58"/><line x1="40" y1="49" x2="38" y2="70"/></g><line x1="74" y1="58" x2="84" y2="40"/><line x1="38" y1="70" x2="34" y2="84"/>'),
-    plank: fig('<g class="mv a-bob" style="transform-origin:50px 50px"><circle cx="24" cy="46" r="8"/><line x1="31" y1="48" x2="78" y2="58"/></g><line x1="78" y1="58" x2="80" y2="80"/><line x1="40" y1="50" x2="36" y2="74"/><line x1="36" y1="74" x2="24" y2="74"/>'),
-    deadbug: fig('<line x1="20" y1="60" x2="60" y2="60"/><circle cx="68" cy="60" r="8"/><g class="mv a-deadL" style="transform-origin:32px 60px"><line x1="32" y1="60" x2="32" y2="34"/></g><g class="mv a-deadR" style="transform-origin:54px 60px"><line x1="54" y1="60" x2="58" y2="34"/></g><line x1="44" y1="60" x2="44" y2="84"/>'),
-    row: fig('<circle cx="34" cy="22" r="9"/><line x1="34" y1="31" x2="34" y2="66"/><line x1="34" y1="66" x2="26" y2="92"/><line x1="34" y1="66" x2="42" y2="92"/><g class="mv a-pull" style="transform-origin:34px 42px"><line x1="34" y1="42" x2="58" y2="42"/><line class="accent" x1="58" y1="36" x2="58" y2="48"/></g>'),
-    pullapart: fig('<circle cx="50" cy="22" r="9"/><line x1="50" y1="31" x2="50" y2="66"/><line x1="50" y1="66" x2="42" y2="92"/><line x1="50" y1="66" x2="58" y2="92"/><g class="mv a-openL" style="transform-origin:50px 44px"><line x1="50" y1="44" x2="30" y2="44"/></g><g class="mv a-openR" style="transform-origin:50px 44px"><line x1="50" y1="44" x2="70" y2="44"/></g><line class="accent" x1="34" y1="44" x2="66" y2="44" stroke-dasharray="3 4"/>'),
-    bridge: fig('<g class="mv a-hip" style="transform-origin:50px 70px"><circle cx="20" cy="64" r="8"/><line x1="27" y1="66" x2="58" y2="64"/></g><line x1="58" y1="64" x2="64" y2="84"/><line x1="64" y1="84" x2="80" y2="84"/><line x1="40" y1="65" x2="40" y2="84"/>'),
-    clamshell: fig('<circle cx="22" cy="40" r="8"/><line x1="28" y1="44" x2="52" y2="56"/><line x1="52" y1="56" x2="48" y2="80"/><g class="mv a-leglift" style="transform-origin:52px 56px"><line x1="52" y1="56" x2="78" y2="62"/></g>'),
-    calf: fig('<g class="mv a-toe" style="transform-origin:50px 50px"><circle cx="50" cy="20" r="9"/><line x1="50" y1="29" x2="50" y2="62"/><line x1="50" y1="40" x2="38" y2="34"/><line x1="50" y1="40" x2="62" y2="34"/><line x1="50" y1="62" x2="42" y2="86"/><line x1="50" y1="62" x2="58" y2="86"/></g><line x1="34" y1="90" x2="66" y2="90"/>')
+    neck: fig('<line x1="50" y1="33" x2="50" y2="68"/><line x1="50" y1="44" x2="36" y2="58"/><line x1="50" y1="44" x2="64" y2="58"/><line x1="50" y1="68" x2="40" y2="92"/><line x1="50" y1="68" x2="60" y2="92"/><g class="a-fadeA"><circle cx="44" cy="25" r="9" fill="currentColor"/><line x1="50" y1="34" x2="46" y2="29"/></g><g class="a-fadeB"><circle cx="56" cy="25" r="9" fill="currentColor"/><line x1="50" y1="34" x2="54" y2="29"/></g>'),
+    catcow: fig('<circle cx="20" cy="58" r="7" fill="currentColor"/><line x1="26" y1="56" x2="34" y2="54"/><line x1="34" y1="54" x2="31" y2="80"/><line x1="70" y1="54" x2="71" y2="80"/><g class="a-fadeA"><path d="M34,54 Q52,36 70,54"/></g><g class="a-fadeB"><path d="M34,54 Q52,66 70,54"/></g>'),
+    rotate: fig('<line x1="50" y1="62" x2="42" y2="92"/><line x1="50" y1="62" x2="58" y2="92"/><g class="mv a-rot" style="transform-origin:50px 62px"><circle cx="50" cy="22" r="9" fill="currentColor"/><line x1="50" y1="31" x2="50" y2="62"/><line x1="50" y1="40" x2="34" y2="52"/><line x1="50" y1="40" x2="66" y2="52"/></g>'),
+    hipcircle: fig('<line x1="50" y1="52" x2="42" y2="92"/><line x1="50" y1="52" x2="58" y2="92"/><g class="mv a-circle" style="transform-origin:50px 52px"><circle cx="50" cy="20" r="9" fill="currentColor"/><line x1="50" y1="29" x2="50" y2="52"/><line x1="50" y1="39" x2="43" y2="51"/><line x1="50" y1="39" x2="57" y2="51"/></g>'),
+    bandover: fig('<circle cx="50" cy="18" r="9" fill="currentColor"/><line x1="50" y1="27" x2="50" y2="66"/><line x1="50" y1="66" x2="42" y2="92"/><line x1="50" y1="66" x2="58" y2="92"/><g class="a-fadeA"><line x1="50" y1="38" x2="44" y2="14"/><line x1="50" y1="38" x2="56" y2="14"/><line class="accent" x1="44" y1="14" x2="56" y2="14" stroke-dasharray="3 3"/></g><g class="a-fadeB"><line x1="50" y1="38" x2="34" y2="64"/><line x1="50" y1="38" x2="66" y2="64"/><line class="accent" x1="34" y1="64" x2="66" y2="64" stroke-dasharray="3 3"/></g>'),
+    ankle: fig('<line x1="32" y1="60" x2="58" y2="60" stroke-width="3"/><line x1="32" y1="60" x2="32" y2="40" stroke-width="3"/><circle cx="40" cy="30" r="7" fill="currentColor"/><line x1="40" y1="37" x2="40" y2="58"/><line x1="40" y1="58" x2="60" y2="58"/><g class="mv a-legext" style="transform-origin:60px 58px"><line x1="60" y1="58" x2="60" y2="80"/></g>'),
+    fold: fig('<line x1="50" y1="60" x2="44" y2="92"/><line x1="50" y1="60" x2="56" y2="92"/><g class="mv a-fold" style="transform-origin:50px 60px"><circle cx="50" cy="22" r="8" fill="currentColor"/><line x1="50" y1="30" x2="50" y2="60"/><line x1="50" y1="39" x2="40" y2="55"/><line x1="50" y1="39" x2="60" y2="55"/></g>'),
+    breathe: fig('<circle cx="50" cy="20" r="9" fill="currentColor"/><line x1="50" y1="29" x2="50" y2="66"/><line x1="50" y1="40" x2="38" y2="54"/><line x1="50" y1="40" x2="62" y2="54"/><line x1="50" y1="66" x2="42" y2="90"/><line x1="50" y1="66" x2="58" y2="90"/><g class="mv a-breathe accent" style="transform-origin:50px 46px"><circle cx="50" cy="46" r="11"/></g>'),
+    chestpress: fig('<circle cx="34" cy="22" r="9" fill="currentColor"/><line x1="34" y1="31" x2="34" y2="66"/><line x1="34" y1="66" x2="26" y2="92"/><line x1="34" y1="66" x2="42" y2="92"/><g class="a-fadeA"><line x1="34" y1="42" x2="58" y2="42"/><line class="accent" x1="58" y1="36" x2="58" y2="48" stroke-width="3"/></g><g class="a-fadeB"><line x1="34" y1="42" x2="44" y2="42"/><line class="accent" x1="44" y1="36" x2="44" y2="48" stroke-width="3"/></g>'),
+    pushup: fig('<line x1="60" y1="52" x2="84" y2="52" stroke-width="3"/><line x1="66" y1="52" x2="66" y2="80" stroke-width="3"/><line x1="80" y1="52" x2="80" y2="80" stroke-width="3"/><g class="mv a-dip" style="transform-origin:50px 60px"><circle cx="58" cy="46" r="7" fill="currentColor"/><line x1="62" y1="50" x2="30" y2="84"/><line x1="62" y1="50" x2="62" y2="58"/></g>'),
+    plank: fig('<g class="mv a-bob" style="transform-origin:50px 58px"><circle cx="22" cy="52" r="7" fill="currentColor"/><line x1="28" y1="54" x2="86" y2="66"/><line x1="34" y1="55" x2="26" y2="62"/><line x1="26" y1="62" x2="42" y2="62"/><line x1="86" y1="66" x2="92" y2="62"/></g>'),
+    deadbug: fig('<line x1="8" y1="70" x2="88" y2="70" stroke-width="2" stroke-dasharray="3 3"/><circle cx="34" cy="64" r="7" fill="currentColor"/><line x1="40" y1="64" x2="58" y2="64"/><g class="a-fadeA"><line x1="40" y1="64" x2="22" y2="58"/><line x1="40" y1="64" x2="42" y2="46"/><line x1="58" y1="64" x2="80" y2="60"/><line x1="58" y1="64" x2="58" y2="48"/><line x1="58" y1="48" x2="46" y2="46"/></g><g class="a-fadeB"><line x1="40" y1="64" x2="32" y2="48"/><line x1="40" y1="64" x2="46" y2="47"/><line x1="58" y1="64" x2="54" y2="48"/><line x1="54" y1="48" x2="46" y2="47"/><line x1="58" y1="64" x2="64" y2="48"/><line x1="64" y1="48" x2="74" y2="48"/></g>'),
+    row: fig('<circle cx="34" cy="22" r="9" fill="currentColor"/><line x1="34" y1="31" x2="34" y2="66"/><line x1="34" y1="66" x2="26" y2="92"/><line x1="34" y1="66" x2="42" y2="92"/><g class="a-fadeA"><line x1="34" y1="42" x2="26" y2="47"/><line x1="26" y1="47" x2="40" y2="49"/><line class="accent" x1="40" y1="49" x2="68" y2="46" stroke-dasharray="3 3"/></g><g class="a-fadeB"><line x1="34" y1="42" x2="52" y2="46"/><line class="accent" x1="52" y1="46" x2="68" y2="46" stroke-dasharray="3 3"/></g>'),
+    pullapart: fig('<circle cx="50" cy="22" r="9" fill="currentColor"/><line x1="50" y1="31" x2="50" y2="66"/><line x1="50" y1="66" x2="42" y2="92"/><line x1="50" y1="66" x2="58" y2="92"/><g class="a-fadeA"><line x1="50" y1="42" x2="28" y2="42"/><line x1="50" y1="42" x2="72" y2="42"/><line class="accent" x1="28" y1="42" x2="72" y2="42" stroke-dasharray="3 3"/></g><g class="a-fadeB"><line x1="50" y1="42" x2="40" y2="41"/><line x1="50" y1="42" x2="60" y2="41"/><line class="accent" x1="40" y1="41" x2="60" y2="41" stroke-dasharray="3 3"/></g>'),
+    bridge: fig('<line x1="8" y1="84" x2="88" y2="84" stroke-width="2" stroke-dasharray="3 3"/><circle cx="16" cy="77" r="7" fill="currentColor"/><line x1="22" y1="79" x2="10" y2="80"/><line x1="70" y1="64" x2="70" y2="84"/><g class="a-fadeA"><line x1="22" y1="79" x2="50" y2="60"/><line x1="50" y1="60" x2="70" y2="64"/></g><g class="a-fadeB"><line x1="22" y1="79" x2="50" y2="77"/><line x1="50" y1="77" x2="70" y2="64"/></g>'),
+    clamshell: fig('<circle cx="26" cy="50" r="7" fill="currentColor"/><line x1="32" y1="52" x2="52" y2="58"/><line x1="32" y1="52" x2="38" y2="64"/><line x1="52" y1="58" x2="72" y2="62"/><line x1="72" y1="62" x2="66" y2="80"/><g class="a-fadeA"><line x1="52" y1="58" x2="70" y2="46"/><line x1="70" y1="46" x2="64" y2="78"/></g><g class="a-fadeB"><line x1="52" y1="58" x2="71" y2="60"/><line x1="71" y1="60" x2="65" y2="79"/></g>'),
+    calf: fig('<line x1="36" y1="92" x2="64" y2="92" stroke-width="2" stroke-dasharray="3 3"/><g class="mv a-toe" style="transform-origin:50px 60px"><circle cx="50" cy="22" r="9" fill="currentColor"/><line x1="50" y1="31" x2="50" y2="60"/><line x1="50" y1="41" x2="41" y2="35"/><line x1="50" y1="41" x2="59" y2="35"/><line x1="50" y1="60" x2="45" y2="84"/><line x1="50" y1="60" x2="55" y2="84"/><line x1="45" y1="84" x2="49" y2="90"/><line x1="55" y1="84" x2="51" y2="90"/></g>')
   };
 
   var morning = [
-    {id:"neck", n:"Nakke- & skulderrundinger", r:"30 sek", c:"Små, rolige sirkler begge veier", q:"neck shoulder rolls mobility"},
-    {id:"catcow", n:"Katt–ku på underarmer", r:"30–45 sek", c:"Pute under knærne, rund og svai ryggen rolig", q:"cat cow on forearms"},
-    {id:"rotate", n:"Bryst-/ryggrotasjon", r:"30 sek", c:"Sittende eller stående, roter rolig side til side", q:"thoracic rotation stretch standing"},
-    {id:"hipcircle", n:"Stående hoftesirkler", r:"30 sek", c:"Hendene på hoftene, knevennlig", q:"standing hip circles mobility"},
-    {id:"bandover", n:"Strikk over hodet", r:"30–45 sek", c:"Bredt grep: foran lårene → over hodet → bak", q:"band shoulder dislocates"},
-    {id:"ankle", n:"Ankel- & knemobilitet", r:"30 sek", c:"Sittende, strekk/bøy rolig, aldri til smerte", q:"seated ankle knee mobility"},
-    {id:"fold", n:"Myk foroverbøy", r:"30 sek", c:"Lett bøyde knær, kjenn baksiden av lårene", q:"standing forward fold soft knees"},
-    {id:"breathe", n:"3 dype pust", r:"—", c:"Avslutt rolig", q:"deep breathing exercise"}
+    {id:"neck", n:"Neck & shoulder rolls", r:"30 sek", c:"Små, rolige sirkler begge veier", v:"https://www.youtube.com/watch?v=JpaYwJLzElM"},
+    {id:"catcow", n:"Cat-cow (on forearms)", r:"30–45 sek", c:"Pute under knærne, rund og svai ryggen rolig", v:"https://www.youtube.com/watch?v=xyNwxiuERXc"},
+    {id:"rotate", n:"Thoracic rotation", r:"30 sek", c:"Sittende eller stående, roter rolig side til side", v:"https://www.youtube.com/watch?v=PWmNVcs8rJY"},
+    {id:"hipcircle", n:"Standing hip circles", r:"30 sek", c:"Hendene på hoftene, knevennlig", v:"https://www.youtube.com/watch?v=altA7815AGs"},
+    {id:"bandover", n:"Band shoulder dislocates", r:"30–45 sek", c:"Bredt grep: foran lårene → over hodet → bak", v:"https://www.youtube.com/watch?v=GTf_xy8QJi8"},
+    {id:"ankle", n:"Seated knee & ankle mobility", r:"30 sek", c:"Sittende, strekk/bøy rolig, aldri til smerte", v:"https://www.youtube.com/watch?v=pZnZfHeyoww"},
+    {id:"fold", n:"Standing forward fold", r:"30 sek", c:"Lett bøyde knær, kjenn baksiden av lårene", v:"https://www.youtube.com/watch?v=SKbYD-Yidfs"},
+    {id:"breathe", n:"Deep breathing (3 breaths)", r:"—", c:"Avslutt rolig", v:"https://www.youtube.com/watch?v=1qass68Zd-M"}
   ];
   var oktA = [
-    {id:"chestpress", n:"Strikk-brystpress", r:"10–12 rep", c:"Strikk festet bak deg, press hendene fram", q:"resistance band chest press"},
-    {id:"pushup", n:"Skrå push-ups mot benk", r:"6–10 rep", c:"Grip kanten; vondt i håndledd? gjør mot vegg", q:"incline push up on bench"},
-    {id:"plank", n:"Underarmsplanke", r:"20–30 sek", c:"Rett kropp, hvil på underarmene", q:"forearm plank beginner"},
-    {id:"deadbug", n:"Dead bug", r:"8 / side", c:"Korsryggen presset i gulvet hele tiden", q:"dead bug exercise"}
+    {id:"chestpress", n:"Band chest press", r:"10–12 rep", c:"Strikk festet bak deg, press hendene fram", v:"https://www.youtube.com/watch?v=F_A2aa9anT0"},
+    {id:"pushup", n:"Incline push-up", r:"6–10 rep", c:"Grip kanten; vondt i håndledd? gjør mot vegg", v:"https://www.youtube.com/watch?v=76TQU7iZlsI"},
+    {id:"plank", n:"Forearm plank", r:"20–30 sek", c:"Rett kropp, hvil på underarmene", v:"https://www.youtube.com/watch?v=BjGVnfGk6j8"},
+    {id:"deadbug", n:"Dead bug", r:"8 / side", c:"Korsryggen presset i gulvet hele tiden", v:"https://www.youtube.com/watch?v=bxn9FBrt4-A"}
   ];
   var oktB = [
-    {id:"row", n:"Strikk-roing", r:"10–12 rep", c:"Trekk albuene bak, klem skulderbladene", q:"resistance band row"},
-    {id:"pullapart", n:"Strikk pull-aparts", r:"12–15 rep", c:"Strake armer, dra hendene fra hverandre", q:"band pull apart"},
-    {id:"bridge", n:"Setebro", r:"12–15 rep", c:"Løft hoftene, klem setet på toppen", q:"glute bridge exercise"},
-    {id:"clamshell", n:"Sideliggende benløft / clamshell", r:"12 / side", c:"Strikk rundt knærne for mer motstand", q:"clamshell exercise"},
-    {id:"calf", n:"Stående tåhev", r:"15 rep", c:"Opp på tærne, senk rolig", q:"standing calf raise"}
+    {id:"row", n:"Seated band row", r:"10–12 rep", c:"Trekk albuene bak, klem skulderbladene", v:"https://www.youtube.com/watch?v=LSkyinhmA8k"},
+    {id:"pullapart", n:"Band pull-apart", r:"12–15 rep", c:"Strake armer, dra hendene fra hverandre", v:"https://www.youtube.com/watch?v=WqdNDTTe-9g"},
+    {id:"bridge", n:"Glute bridge", r:"12–15 rep", c:"Løft hoftene, klem setet på toppen", v:"https://www.youtube.com/watch?v=nuapk_-Q2BI"},
+    {id:"clamshell", n:"Clamshell (side-lying)", r:"12 / side", c:"Strikk rundt knærne for mer motstand", v:"https://www.youtube.com/watch?v=Cn09FlW5Zfs"},
+    {id:"calf", n:"Standing calf raise", r:"15 rep", c:"Opp på tærne, senk rolig", v:"https://www.youtube.com/watch?v=Uyg2QR1WAq8"}
   ];
 
   var dayNames={1:"Mandag",2:"Tirsdag",3:"Onsdag",4:"Torsdag",5:"Fredag"};
@@ -279,7 +266,7 @@
           +'<div class="cue">'+ex.c+'</div>'
           +'<div class="actions">'
             +'<button class="check" data-id="'+ex.id+'">'+(isDone?ICON.check+' Fullført':ICON.circle+' Marker')+'</button>'
-            +'<a class="vid" target="_blank" rel="noopener" href="https://www.youtube.com/results?search_query='+encodeURIComponent(ex.q)+'">'+ICON.play+' Video</a>'
+            +'<a class="vid" target="_blank" rel="noopener" href="'+ex.v+'">'+ICON.play+' Video</a>'
           +'</div>'
         +'</div></div>';
     });
